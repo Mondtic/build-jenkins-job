@@ -1,5 +1,4 @@
 import abc
-from json import JSONType
 from typing import Type, Optional
 
 class ServerRepository:
@@ -11,4 +10,4 @@ class ServerRepository:
     def get_number(self) -> int: pass
 
     @abc.abstractmethod
-    def get_status(self, name:str, number: int) -> str: pass
+    def get_status(self, number: int) -> str: pass

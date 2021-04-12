@@ -17,7 +17,7 @@ JENKINS_USERNAME = mandatory_arg(sys.argv[3])
 JENKINS_JOB_NAME = mandatory_arg(sys.argv[4])
 
 #Optional args
-JENKINS_JOB_PARAMS = sys.argv[5] or '{}'
+JENKINS_JOB_PARAMS = sys.argv[5] if len(sys.argv) > 5 else '{}'
 
 #Set Jenkins Connection
 repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, username=JENKINS_USERNAME)
@@ -32,7 +32,7 @@ build_number = finder.number()
 print(f"BUILD NUMBER: {build_number}")
 
 #Get build status
-while not (status := finder.status(JENKINS_JOB_NAME, build_number)):
+while not (status := finder.exec(build_number)):
     time.sleep(1)
 
 print(f"Job status is : {status}")

@@ -15,26 +15,21 @@ class ServerJenkinsRepository(ServerRepository):
         self.__connection = jenkins.Jenkins(self.__url, username=self.__username, password=self.__token)
 
     def build(self, name:str, params:str) -> None:
-        self.__connection.build_job(name, parameters=json.loads(params), token=self.__token)
-    
-    def __get_queue_info(self) -> None:
-        self.__queue_info = self.__connection.get_queue_info()
-    
-    def __get_queue_id(self) -> int:
-        self.__get_queue_info()
-        return self.__queue_info[0].get('id')
+        self.__name = name
+        queue_id = self.__connection.build_job(name, parameters=json.loads(params), token=self.__token)
+        self.__queue_id = queue_id
 
-    def __get_job_info(self):
-        protocol,domain = url.split("://")
-        url = f"{protocol}://{self.__username}:{self.__token}@{domain}/queue/item/{self.__get_queue_id()}/api/json?pretty=true"
+    def __get_queue_info(self):
+        protocol,domain = self.__url.split("://")
+        url = f"{protocol}://{self.__username}:{self.__token}@{domain}/queue/item/{self.__queue_id}/api/json?pretty=true"
         info = requests.get(url).json()
         return info
 
     def get_number(self) -> int:
-        while "executable" not in (info := self.__get_job_info()):
+        while "executable" not in (info := self.__get_queue_info()):
             time.sleep(3)
         return info["executable"]["number"]
     
-    def get_status(self, name, number) -> str:
-        build_info = self.__connection.get_build_info(name=name, number=number)
+    def get_status(self, number) -> str:
+        build_info = self.__connection.get_build_info(name=self.__name, number=number)
         return build_info["result"]

@@ -1,4 +1,5 @@
 from src.apps.Jenkins.Domain.ServerRepository import ServerRepository
+from typing import Type
 
 class JobBuilder:
     def __init__(self, repository: Type[ServerRepository]) -> None:

@@ -9,5 +9,5 @@ class JobParams(str):
     def __is_a_json(self) -> None:
         try:
             json.loads(self)
-        except:
+        except ValueError:
             raise JobParamsIsNotValidJson

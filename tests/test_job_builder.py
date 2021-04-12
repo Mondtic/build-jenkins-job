@@ -1,6 +1,7 @@
 from src.apps.Jenkins.Application.Build.JobBuilder import JobBuilder
 from src.apps.Jenkins.Infrastructure.ServerInMemoryRepository import ServerInMemoryRepository
 
+
 class TestJobBuilder:
     def test_should_build_a_job(self):
         repository = ServerInMemoryRepository(

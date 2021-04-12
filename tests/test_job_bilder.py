@@ -9,6 +9,6 @@ class TestJobBuilder:
             status="SUCCESS"
         )
         builder = JobBuilder(repository=repository)
-        builder.exec(name="test_job", params={})
+        builder.exec(name="test_job", params="{}")
 
         assert repository.queue_id == 22

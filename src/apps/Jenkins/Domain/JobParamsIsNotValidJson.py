@@ -1,0 +1,2 @@
+class JobParamsIsNotValidJson(Exception):
+    pass

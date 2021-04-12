@@ -5,6 +5,7 @@ import time
 from src.apps.Jenkins.Infrastructure.ServerJenkinsRepository import ServerJenkinsRepository
 from src.apps.Jenkins.Application.Build.JobBuilder import JobBuilder
 from src.apps.Jenkins.Application.Find.BuildFinder import BuildFinder
+from src.apps.Jenkins.Domain.JobParams import JobParams
 
 def mandatory_arg(argv):
     if argv == "":
@@ -24,7 +25,7 @@ repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, usern
 
 #Build Job
 builder = JobBuilder(repository=repository)
-builder.exec(name=JENKINS_JOB_NAME, params=JENKINS_JOB_PARAMS)
+builder.exec(name=JENKINS_JOB_NAME, params=JobParams(JENKINS_JOB_PARAMS))
 
 #Get build number
 finder = BuildFinder(repository=repository)

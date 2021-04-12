@@ -4,6 +4,7 @@ import requests
 import time
 from typing import Any
 from src.apps.Jenkins.Domain.ServerRepository import ServerRepository
+from src.apps.Jenkins.Domain.JobParams import JobParams
 
 class ServerJenkinsRepository(ServerRepository):
     def __init__(self, url: str, token: str, username: str):
@@ -14,7 +15,7 @@ class ServerJenkinsRepository(ServerRepository):
         #Start Connection
         self.__connection = jenkins.Jenkins(self.__url, username=self.__username, password=self.__token)
 
-    def build(self, name:str, params:str) -> None:
+    def build(self, name:str, params: JobParams) -> None:
         self.__name = name
         queue_id = self.__connection.build_job(name, parameters=json.loads(params), token=self.__token)
         self.__queue_id = queue_id

@@ -1,0 +1,34 @@
+# action.yml
+name: 'Build Jenkins job'
+description: 'Build Jenkins job'
+inputs:
+  jenkins-url:
+    description: 'full Jenkins site url'
+    required: true
+  jenkins-token:
+    description: 'Jenkins api token'
+    required: true
+  jenkins-user:
+    description: "Jenkins username"
+    required: true
+  jenkins-job:
+    description: 'Jenkins job name'
+    required: true
+  jenkins-job-params:
+    description: "Jenkins job params. JSON string. i.e '{'STRING_PARAM': 'value1', 'BOOLEAN_PARAM': false}' "
+    required: false
+outputs:
+  job_status:
+    description: 'Jenkins job build status'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.jenkins-url}}
+    - ${{ inputs.jenkins-token}}
+    - ${{ inputs.jenkins-user}}
+    - ${{ inputs.jenkins-job }}
+    - ${{ inputs.jenkins-job-params}}
+branding:
+  icon: 'arrow-right-circle'
+  color: 'blue'

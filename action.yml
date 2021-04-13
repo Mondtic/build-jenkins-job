@@ -1,6 +1,6 @@
 # action.yml
-name: 'Build Jenkins job'
-description: 'Build Jenkins job'
+name: 'Run jenkins jobs'
+description: 'Build jenkins jobs using the jenkins api'
 inputs:
   jenkins-url:
     description: 'full Jenkins site url'
@@ -30,5 +30,5 @@ runs:
     - ${{ inputs.jenkins-job }}
     - ${{ inputs.jenkins-job-params}}
 branding:
-  icon: 'arrow-right-circle'
-  color: 'blue'
+  icon: 'arrow-up-right'
+  color: 'yellow'

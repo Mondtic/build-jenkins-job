@@ -14,6 +14,10 @@ inputs:
   jenkins-job:
     description: 'Jenkins job name'
     required: true
+  jenkins-wait-job:
+    description: 'Wait for the job build status'
+    required: false
+    default: '--no-wait-job'
   jenkins-job-params:
     description: "Jenkins job params. JSON string. i.e '{'STRING_PARAM': 'value1', 'BOOLEAN_PARAM': false}' "
     required: false
@@ -24,11 +28,12 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.jenkins-url}}
-    - ${{ inputs.jenkins-token}}
-    - ${{ inputs.jenkins-user}}
-    - ${{ inputs.jenkins-job }}
-    - ${{ inputs.jenkins-job-params}}
+    - -host ${{ inputs.jenkins-url}}
+    - -tk ${{ inputs.jenkins-token}}
+    - -u ${{ inputs.jenkins-user}}
+    - -jb ${{ inputs.jenkins-job }}
+    - -p ${{ inputs.jenkins-job-params}}
+    - ${{ inputs.jenkins-wait-job}}
 branding:
   icon: 'arrow-up-right'
   color: 'yellow'

@@ -22,7 +22,18 @@ Jenkins job name
 **i.e** Production-deployment-pipeline
 **(Required)** 
 
-### `job-params`
+### `jenkins-wait-job`
+**Not mandatory**
+
+Wait for the job build status
+
+**values**
+```
+ "wait" #Default
+ "no-wait"
+``` 
+
+### `jenkins-job-params`
 
 **Not mandatory**
 
@@ -41,6 +52,7 @@ Set jenkins params as JSON string:
 * FAILURE
 * SUCCESS
 * ABORTED
+* EXECUTED
 
 
 ## Example usage
@@ -53,4 +65,9 @@ Set jenkins params as JSON string:
         jenkins-user: ${{ secrets.JENKINS_USER }}
         jenkins-job: ${{ secrets.JENKINS_JOB }}
         jenkins-job-params: "{'stringparam': 'stringvalue', 'booleanparam': false}"
+        jenkins-wait-job: "no-wait"
 ```
+
+## Notes:
+If your job needs params and you want to use the default params, you will need to set Jenkins-job-params: "{'any_param': 'any_value'}"
+otherwise, you will receive a 400 Bad request error.

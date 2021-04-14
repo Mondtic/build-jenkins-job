@@ -17,6 +17,11 @@ inputs:
   jenkins-job-params:
     description: "Jenkins job params. JSON string. i.e '{'STRING_PARAM': 'value1', 'BOOLEAN_PARAM': false}' "
     required: false
+    default: '{}'
+  jenkins-wait-job: 
+    description: "Wait for the job build status"
+    required: false
+    default: 'wait'
 outputs:
   job_status:
     description: 'Jenkins job build status'
@@ -29,6 +34,7 @@ runs:
     - ${{ inputs.jenkins-user}}
     - ${{ inputs.jenkins-job }}
     - ${{ inputs.jenkins-job-params}}
+    - ${{ inputs.jenkins-wait-job }}
 branding:
   icon: 'arrow-up-right'
   color: 'yellow'

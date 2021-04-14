@@ -20,7 +20,8 @@ JENKINS_USERNAME = mandatory_arg(sys.argv[3])
 JENKINS_JOB_NAME = mandatory_arg(sys.argv[4])
 
 # Optional args
-JENKINS_JOB_PARAMS = sys.argv[5] if len(sys.argv) > 5 else '{}'
+JENKINS_JOB_PARAMS = sys.argv[5] if len(sys.argv) >= 5 else '{}'
+JENKINS_WAIT_JOB = sys.argv[6] if len(sys.argv) >= 6 else "wait"
 
 # Set Jenkins Connection
 repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, username=JENKINS_USERNAME)
@@ -33,6 +34,11 @@ builder.exec(name=JENKINS_JOB_NAME, params=JobParams(JENKINS_JOB_PARAMS))
 finder = BuildFinder(repository=repository)
 build_number = finder.number()
 print(f"BUILD NUMBER: {build_number}")
+
+if JENKINS_WAIT_JOB == "no-wait" and build_number:
+    print("Job status is : EXECUTED")
+    print("::set-output name=job_status::EXECUTED")
+    exit(0)
 
 # Get build status
 while not (status := finder.exec(build_number)):

@@ -21,7 +21,7 @@ JENKINS_JOB_NAME = mandatory_arg(sys.argv[4])
 
 # Optional args
 JENKINS_JOB_PARAMS = sys.argv[5] if len(sys.argv) >= 5 else '{}'
-JENKINS_WAIT_JOB = sys.argv[6] if len(sys.argv) >= 6 else "no-wait"
+JENKINS_WAIT_JOB = sys.argv[6] if len(sys.argv) >= 6 else "wait"
 
 # Set Jenkins Connection
 repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, username=JENKINS_USERNAME)

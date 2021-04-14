@@ -29,8 +29,8 @@ Wait for the job build status
 
 **values**
 ```
- "--wait-job"
- "--no-wait-job" #Default
+ "wait" #Default
+ "no-wait"
 ``` 
 
 ### `jenkins-job-params`
@@ -65,5 +65,5 @@ Set jenkins params as JSON string:
         jenkins-user: ${{ secrets.JENKINS_USER }}
         jenkins-job: ${{ secrets.JENKINS_JOB }}
         jenkins-job-params: "{'stringparam': 'stringvalue', 'booleanparam': false}"
-        jenkins-wait-job: "--wait-job"
+        jenkins-wait-job: "no-wait"
 ```

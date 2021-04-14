@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 import time
-import argparse
+from argparse import ArgumentParser, BooleanOptionalAction
 
 from src.apps.Jenkins.Infrastructure.ServerJenkinsRepository import ServerJenkinsRepository
 from src.apps.Jenkins.Application.Build.JobBuilder import JobBuilder
 from src.apps.Jenkins.Application.Find.BuildFinder import BuildFinder
 from src.apps.Jenkins.Domain.JobParams import JobParams
 
-parser = argparse.ArgumentParser()
+parser = ArgumentParser()
 
 parser.add_argument("-host", "--hostname", help="Jenkins full url i.e: https://your-jenkins-site.com", required=True)
 parser.add_argument("-u", "--username", help="Jenkins username", required=True)
 parser.add_argument("-tk", "--token", help="Jenkins API token", required=True)
 parser.add_argument("-jb", "--jobname", help="Jenkins job name", required=True)
 parser.add_argument("-p", "--params", help="Jenkins job parameters", required=False, default="{}")
-parser.add_argument("--wait-job", action=argparse.BooleanOptionalAction, help="Wait for the job build status")
+parser.add_argument("--wait-job", action=BooleanOptionalAction, help="Wait for the job build status")
 
 args = parser.parse_args()
 

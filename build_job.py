@@ -36,7 +36,7 @@ builder = JobBuilder(repository=repository)
 builder.exec(name=JENKINS_JOB_NAME, params=JobParams(JENKINS_JOB_PARAMS))
 
 # Get build number
-finder = BuildFinder(repository=repository)
+finder = BuildFinder(repository=repository, name=JENKINS_JOB_NAME)
 build_number = finder.number()
 print(f"BUILD NUMBER: {build_number}")
 

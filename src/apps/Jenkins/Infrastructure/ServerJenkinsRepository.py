@@ -36,3 +36,6 @@ class ServerJenkinsRepository(ServerRepository):
     def get_status(self, number) -> str:
         build_info = self.__connection.get_build_info(name=self.__name, number=number)
         return build_info["result"]
+    
+    def get_build_console_output(self, name, number):
+        return self.__connection.get_build_console_output(name, number)

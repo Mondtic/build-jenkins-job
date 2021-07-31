@@ -51,6 +51,7 @@ while not (status := finder.exec(build_number)):
 
 print(f"Job status is : {status}")
 print(f"::set-output name=job_status::{status}")
+print(f"::set-output name=job_build_number::{build_number}")
 
 if status != 'SUCCESS':
     exit(1)

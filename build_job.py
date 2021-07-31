@@ -36,7 +36,7 @@ builder = JobBuilder(repository=repository)
 builder.exec(name=JENKINS_JOB_NAME, params=JobParams(JENKINS_JOB_PARAMS))
 
 # Get build number
-finder = BuildFinder(repository=repository)
+finder = BuildFinder(repository=repository, name=JENKINS_JOB_NAME)
 build_number = finder.number()
 print(f"BUILD NUMBER: {build_number}")
 
@@ -51,6 +51,7 @@ while not (status := finder.exec(build_number)):
 
 print(f"Job status is : {status}")
 print(f"::set-output name=job_status::{status}")
+print(f"::set-output name=job_build_number::{build_number}")
 
 if status != 'SUCCESS':
     exit(1)

@@ -27,7 +27,7 @@ inputs:
     required: false
     default: true   
 outputs:
-  job_buildnumber:
+  job_build_number:
     description: 'buildnumber of the triggered job'
   job_status:
     description: 'Jenkins job build status'

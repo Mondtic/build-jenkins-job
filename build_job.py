@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import time
+import urllib3
 
 from src.apps.Jenkins.Infrastructure.ServerJenkinsRepository import ServerJenkinsRepository
 from src.apps.Jenkins.Application.Build.JobBuilder import JobBuilder
@@ -22,9 +23,13 @@ JENKINS_JOB_NAME = mandatory_arg(sys.argv[4])
 # Optional args
 JENKINS_JOB_PARAMS = sys.argv[5] if len(sys.argv) >= 5 else '{}'
 JENKINS_WAIT_JOB = sys.argv[6] if len(sys.argv) >= 6 else "wait"
+JENKINS_SSL_VERIFY = (sys.argv[7] == 'true') if len(sys.argv) >= 7 else true
+
+if not JENKINS_SSL_VERIFY:
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Set Jenkins Connection
-repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, username=JENKINS_USERNAME)
+repository = ServerJenkinsRepository(url=JENKINS_URL, token=JENKINS_TOKEN, username=JENKINS_USERNAME, ssl_verify=JENKINS_SSL_VERIFY)
 
 # Build Job
 builder = JobBuilder(repository=repository)

@@ -17,11 +17,15 @@ inputs:
   jenkins-job-params:
     description: "Jenkins job params. JSON string. i.e '{'STRING_PARAM': 'value1', 'BOOLEAN_PARAM': false}' "
     required: false
-    default: '{}'
+    default: '{}'    
   jenkins-wait-job: 
     description: "Wait for the job build status"
     required: false
     default: 'wait'
+  jenkins-ssl-verify: 
+    description: "Verify SSL certificate"
+    required: false
+    default: true   
 outputs:
   job_status:
     description: 'Jenkins job build status'
@@ -35,6 +39,7 @@ runs:
     - ${{ inputs.jenkins-job }}
     - ${{ inputs.jenkins-job-params}}
     - ${{ inputs.jenkins-wait-job }}
+    - ${{ inputs.jenkins-ssl-verify }}    
 branding:
   icon: 'arrow-up-right'
   color: 'yellow'

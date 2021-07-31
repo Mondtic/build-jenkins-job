@@ -44,6 +44,12 @@ Set jenkins params as JSON string:
  "{'param1': 'value1', 'param2': 'value2'}"
 ``` 
 
+### `jenkins-ssl-verify`
+
+**Not mandatory**
+
+Defaults to `true`. Ignores errors and warning about SSL certificates if set to `false`.
+Doing so is insecure, but for self-hosted runners with self-signed certificates if may be useful.
 
 ## Outputs
 
@@ -66,6 +72,7 @@ Set jenkins params as JSON string:
         jenkins-job: ${{ secrets.JENKINS_JOB }}
         jenkins-job-params: "{'stringparam': 'stringvalue', 'booleanparam': false}"
         jenkins-wait-job: "no-wait"
+        jenkins-ssl-verify: "true"
 ```
 
 ## Notes:

@@ -7,6 +7,7 @@ COPY build.py /build.py
 COPY requirements.txt /requirements.txt
 
 RUN chmod +x /build.py
+RUN update-ca-certificates
 
 WORKDIR /
 

@@ -7,6 +7,8 @@ COPY build.py /build.py
 COPY requirements.txt /requirements.txt
 
 RUN chmod +x /build.py
+
+RUN apt-get install ca-certificates
 RUN update-ca-certificates
 
 WORKDIR /

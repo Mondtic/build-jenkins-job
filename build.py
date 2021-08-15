@@ -74,5 +74,5 @@ while True:
 print(f"Build completed with status: {status}")
 print(f"::set-output name=job_status::{status}")
 
-if status != 'SUCCESS':
+if status not in ['SUCCESS', 'UNSTABLE']:
     exit(1)

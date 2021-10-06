@@ -5,6 +5,7 @@ import jenkins
 import json
 import requests
 import urllib3
+import json
 
 # Arguments
 optional_arg = lambda argv, index, default: default if (len(argv) <= index or argv == "") else argv[index]
@@ -30,6 +31,8 @@ while True:
     try: 
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
+        print(f"{json.dump(queue_info, 1)}")
+
         break
     except KeyError:
         # todo: sometimes executable is in queue_info, but
@@ -41,6 +44,7 @@ while True:
 if build_number is None:
     raise Exception("Build could not be started")
 
+print(f"{connection.get_build_info(JENKINS_JOB_NAME, build_number}")
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
 

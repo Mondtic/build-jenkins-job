@@ -27,11 +27,13 @@ print(f"Build queued with queue_id: {queue_id}")
 # Wait for the build to start and store the build no
 protocol, domain = JENKINS_URL.split("://")
 build_number = None
+build_url = None
 while True:
     try: 
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
-        print(json.dumps(queue_info))
+        build_url = queue_info["executable"]["url"]
+        build_url.replace("***", JENKINS_URL)
 
         break
     except KeyError:
@@ -44,9 +46,9 @@ while True:
 if build_number is None:
     raise Exception("Build could not be started")
 
-print(f"{connection.get_build_info(JENKINS_JOB_NAME, build_number)}")
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
+print(f"Build URL: {build_url}")
 
 # early exit?
 if JENKINS_WAIT_JOB == "no-wait" and build_number:

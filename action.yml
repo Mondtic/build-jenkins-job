@@ -23,6 +23,8 @@ inputs:
     required: false
     default: 'wait'
 outputs:
+  job_build_number:
+    description: 'buildnumber of the triggered job'
   job_status:
     description: 'Jenkins job build status'
 runs:

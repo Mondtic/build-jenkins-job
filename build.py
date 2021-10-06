@@ -31,7 +31,7 @@ while True:
     try: 
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
-        print(f"{json.dump(queue_info, 1)}")
+        print(json.dumps(queue_info))
 
         break
     except KeyError:

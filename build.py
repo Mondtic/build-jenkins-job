@@ -44,7 +44,7 @@ while True:
 if build_number is None:
     raise Exception("Build could not be started")
 
-print(f"{connection.get_build_info(JENKINS_JOB_NAME, build_number}")
+print(f"{connection.get_build_info(JENKINS_JOB_NAME, build_number)}")
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
 

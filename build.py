@@ -34,6 +34,7 @@ while True:
         build_number = queue_info["executable"]["number"]
         raw_url = queue_info["executable"]["url"]
         raw_url_list = list(raw_url)
+        print(raw_url_list)
         build_url = "".join(raw_url_list)
 
         break

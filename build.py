@@ -27,14 +27,14 @@ print(f"Build queued with queue_id: {queue_id}")
 # Wait for the build to start and store the build no
 protocol, domain = JENKINS_URL.split("://")
 build_number = None
-build_url = ""
+build_url = None
 while True:
     try: 
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
         raw_url = queue_info["executable"]["url"]
-        raw_url_list = list(build_url)
-        build_url = build_url.join(raw_url_list)
+        raw_url_list = list(raw_url)
+        build_url = "".join(raw_url_list)
 
         break
     except KeyError:

@@ -32,8 +32,8 @@ while True:
     try: 
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
-        # raw_url = queue_info["executable"]["url"]
-        # build_url = list(raw_url)
+        raw_url = queue_info["executable"]["url"]
+        build_protocol, build_url = raw_url.split("://")
 
         break
     except KeyError:
@@ -48,11 +48,7 @@ if build_number is None:
 
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
-# print("Build URL: ", end = "")
-# for i in range(len(build_url)):
-#     print(build_url[i], end = "")
-# print()
-print(f"Build URL: {JENKINS_URL}/{JENKINS_JOB_NAME}/{build_number}")
+print(f"Build URL: {protocol}://{build_url}")
 
 # early exit?
 if JENKINS_WAIT_JOB == "no-wait" and build_number:

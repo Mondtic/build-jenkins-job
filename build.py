@@ -48,7 +48,7 @@ if build_number is None:
 
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
-print(f"Build URL: ://{build_url}")
+print(f"Build URL: https://{build_url}")
 
 # early exit?
 if JENKINS_WAIT_JOB == "no-wait" and build_number:

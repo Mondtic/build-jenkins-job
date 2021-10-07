@@ -49,7 +49,7 @@ if build_number is None:
 print(f"Build started with build_number: {build_number}")
 print(f"::set-output name=job_build_number::{build_number}")
 print("Build URL: ", end = "")
-for i in range(build_url.len):
+for i in range(build_url.len()):
     print(build_url[i], end = "")
 print()
 

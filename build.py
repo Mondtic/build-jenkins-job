@@ -33,7 +33,7 @@ while True:
         queue_info = requests.get(f"{protocol}://{JENKINS_USERNAME}:{JENKINS_TOKEN}@{domain}/queue/item/{queue_id}/api/json?pretty=true").json()
         build_number = queue_info["executable"]["number"]
         build_url = queue_info["executable"]["url"]
-        build_url.join(list(build_url))
+        build_url = build_url.join(list(build_url))
 
         break
     except KeyError:
